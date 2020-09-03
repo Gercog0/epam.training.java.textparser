@@ -8,7 +8,7 @@ import by.training.homework2.parser.BaseParser;
 public class SentenceParser implements BaseParser {
     private static final SentenceParser instance = new SentenceParser();
 
-    private static final String SENTENCE_REGEX = "[.!?]";
+    private static final String SENTENCE_REGEX = "[\\.?!]\\s? | [\\.{3}]\\s?";
     private static LexemeParser lexemeParser = LexemeParser.getInstance();
     private TextComponent componentParagraph;
     private TextComponent componentLexeme;
