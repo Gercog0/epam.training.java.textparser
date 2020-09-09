@@ -2,8 +2,12 @@ package by.training.homework2.composite.impl;
 
 import by.training.homework2.composite.TextComponent;
 import by.training.homework2.composite.TextComponentType;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
-public class Leaf implements TextComponent {
+import java.util.List;
+
+public class SymbolLeaf implements TextComponent {
     public enum Type {
         PUNCTUATION, CHARACTER;
     }
@@ -11,30 +15,39 @@ public class Leaf implements TextComponent {
     private String content;
     private Type type;
 
-    public Leaf(String symbol, Type type) {
+    private static final Logger logger = LogManager.getLogger(SymbolLeaf.class);
+
+    public SymbolLeaf(String symbol, Type type) {
         this.content = symbol;
         this.type = type;
     }
 
-    // TODO: 02.09.2020 logger... 
     @Override
     public void add(TextComponent component) {
+        logger.fatal("Method is not available...");
         throw new UnsupportedOperationException("Method is not supported");
     }
 
     @Override
     public void remove(TextComponent component) {
+        logger.fatal("Method is not available...");
         throw new UnsupportedOperationException("Method is not supported");
     }
 
     @Override
     public TextComponent getChild(int index) {
+        logger.fatal("Method is not available...");
         throw new UnsupportedOperationException("Method is not supported");
     }
 
     @Override
     public TextComponentType getComponentType() {
         return TextComponentType.SYMBOL;
+    }
+
+    @Override
+    public List<TextComponent> getComponents() {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -45,12 +58,12 @@ public class Leaf implements TextComponent {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Leaf leaf1 = (Leaf) o;
+        SymbolLeaf symbolLeaf1 = (SymbolLeaf) o;
 
-        if (content.equals(leaf1.content)) {
+        if (content.equals(symbolLeaf1.content)) {
             return false;
         }
-        return type == leaf1.type;
+        return type == symbolLeaf1.type;
     }
 
     @Override

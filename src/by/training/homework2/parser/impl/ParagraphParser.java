@@ -10,8 +10,6 @@ public class ParagraphParser implements BaseParser {
 
     private static final String PARAGRAPH_REGEX = "\\n";
     private SentenceParser sentenceParser = SentenceParser.getInstance();
-    private TextComponent componentSentence;
-    private TextComponent componentText;
 
     private ParagraphParser() {
     }
@@ -22,7 +20,8 @@ public class ParagraphParser implements BaseParser {
 
     @Override
     public TextComponent parse(String text) {
-        componentText = new TextComposite(TextComponentType.TEXT);
+        TextComponent componentText = new TextComposite(TextComponentType.TEXT);
+        TextComponent componentSentence;
         String[] paragraphs = text.split(PARAGRAPH_REGEX);
         for (String element : paragraphs) {
             componentSentence = sentenceParser.parse(element);

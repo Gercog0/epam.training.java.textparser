@@ -8,10 +8,8 @@ import by.training.homework2.parser.BaseParser;
 public class SentenceParser implements BaseParser {
     private static final SentenceParser instance = new SentenceParser();
 
-    private static final String SENTENCE_REGEX = "[\\.?!]\\s? | [\\.{3}]\\s?";
+    private static final String SENTENCE_REGEX = "(?<=\\?\\!\\.\\.{3})";
     private static LexemeParser lexemeParser = LexemeParser.getInstance();
-    private TextComponent componentParagraph;
-    private TextComponent componentLexeme;
 
     private SentenceParser() {
     }
@@ -22,8 +20,10 @@ public class SentenceParser implements BaseParser {
 
     @Override
     public TextComponent parse(String text) {
-        componentParagraph = new TextComposite(TextComponentType.PARAGRAPH);
+        TextComponent componentParagraph = new TextComposite(TextComponentType.PARAGRAPH);
+        TextComponent componentLexeme;
         String[] sentences = text.split(SENTENCE_REGEX);
+
         for (String element : sentences) {
             componentLexeme = lexemeParser.parse(element);
             componentParagraph.add(componentLexeme);

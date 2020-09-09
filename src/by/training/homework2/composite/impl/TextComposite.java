@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
+    private static final String REGEX_PARAGRAPH = "\n\t";
+    private static final String REGEX_SPACE = " ";
+
     private TextComponentType currentType;
     private List<TextComponent> components;
 
@@ -33,6 +36,11 @@ public class TextComposite implements TextComponent {
     @Override
     public TextComponentType getComponentType() {
         return currentType;
+    }
+
+    @Override
+    public List<TextComponent> getComponents() {
+        return components;
     }
 
     @Override
@@ -64,13 +72,13 @@ public class TextComposite implements TextComponent {
 
         for (TextComponent component : components) {
             if (TextComponentType.PARAGRAPH.equals(component.getComponentType())) {
-                builder.append("\n\t");
+                builder.append(REGEX_PARAGRAPH);
             }
             if (TextComponentType.LEXEME.equals(component.getComponentType())) {
-                builder.append(" ");
+                builder.append(REGEX_SPACE);
             }
 
-            builder.append(component.toString());
+            builder.append(component.toString().trim());
         }
         return builder.toString();
     }
